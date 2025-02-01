@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enrolled Students - School Management System</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .enrolled-students-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+      margin-bottom: 2rem;
+    }
+    .table {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    }
+    .table thead {
+      background-color: #2c3e50;
+      color: white;
+    }
+    .table th, .table td {
+      padding: 1rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .table tbody tr {
+      transition: background-color 0.2s ease;
+    }
+    .table tbody tr:hover {
+      background-color: #f1f1f1;
+    }
+    .btn-custom {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: background-color 0.2s ease;
+    }
+    .btn-custom:hover {
+      background-color: #1a252f;
+    }
+    .header-icon {
+      font-size: 1.5rem;
+      margin-right: 0.5rem;
+    }
+    .text-primary-custom {
+      color: #2c3e50;
+    }
+  </style>
+</head>
+<body>
+<th:block th:replace="~{FRAGMENTS/navbar :: navbar}"></th:block>
+
+<div class="container">
+  <!-- Enrolled Students Card -->
+  <div class="enrolled-students-card">
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <h1 class="display-5 fw-bold">
+        <i class="fas fa-users header-icon"></i>
+        Students Enrolled in Module: <span th:text="${module.name}" class="text-primary-custom"></span>
+      </h1>
+      <p class="lead text-muted">View the list of students enrolled in this module.</p>
+    </div>
+
+    <!-- Enrolled Students Table -->
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">Student ID</th>
+          <th scope="col">Student Name</th>
+          <th scope="col">Status</th>
+          <th scope="col">Enrollment Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="enrollment : ${students}">
+          <td th:text="${enrollment.student.id}"></td>
+          <td th:text="${enrollment.student.firstName + ' ' + enrollment.student.lastName}"></td>
+          <td th:text="${enrollment.getStatus()}"></td>
+          <td th:text="${enrollment.getEnrollmentDate()}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

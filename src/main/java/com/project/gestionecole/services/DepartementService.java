@@ -20,4 +20,11 @@ public class DepartementService {
     public List<Professor> getProfessorsOfDepartement(Long id) {
         return departementRepository.getProfessorsOfDeprtement(id);
     }
+    public Departement getDepartement(String name) {
+        return departementRepository.findByName(name);
+    }
+    public Departement getDepartementById(Long id) {
+        return departementRepository.getReferenceById(id);
+    }
+
 }

@@ -90,6 +90,7 @@
         <label for="firstName" class="form-label">First Name</label>
         <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
       </div>
+      <input type="hidden" class="form-control" id="hiringdate" th:field="*{birthDate}" th:value="${editStudentRequest.birthDate}">
 
       <!-- Last Name -->
       <div class="mb-3">
@@ -110,10 +111,10 @@
       </div>
 
       <!-- Birth Date -->
-      <div class="mb-3">
-        <label for="birthDate" class="form-label">Birth Date</label>
-        <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}">
-      </div>
+<!--      <div class="mb-3">-->
+<!--        <label for="birthDate" class="form-label">Birth Date</label>-->
+<!--        <input type="date" class="form-control" id="birthDate" th:field="*{birthDate}">-->
+<!--      </div>-->
 
       <!-- Submit Button -->
       <div class="d-grid gap-2">

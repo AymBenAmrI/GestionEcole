@@ -1,6 +1,7 @@
 package com.project.gestionecole.controllers;
 import com.project.gestionecole.dtos.AddProfessorRequest;
 import com.project.gestionecole.dtos.EditProfessorRequest;
+import com.project.gestionecole.models.Departement;
 import com.project.gestionecole.models.Professor;
 import com.project.gestionecole.models.Role;
 import com.project.gestionecole.models.RoleNames;
@@ -58,9 +59,8 @@ public class ProfessorController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         addAuthenticationDetailsToModel(model);
-
         model.addAttribute("addProfessorRequest", new AddProfessorRequest());
-        model.addAttribute("departements", departementService.getAllDertement());
+        model.addAttribute("departments", departementService.getAllDertement());
         return "professors/add";
     }
 
@@ -83,11 +83,11 @@ public class ProfessorController {
         professor.setDepartement(professorService.getDertement(addProfessorRequest.getDepartement()));
         professor.setHiringDate(addProfessorRequest.getHiringDate());
         professor.setRoles(List.of(role));
+        System.out.println(professor.toString());
 
         professorService.saveProfessor(professor);
         return "redirect:/professors";
     }
-
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable int id, Model model) {
         addAuthenticationDetailsToModel(model);
@@ -108,13 +108,12 @@ public class ProfessorController {
         editProfessorRequest.setBirthDate(professor.getBirthDate());
         editProfessorRequest.setHiringDate(professor.getHiringDate());
         if (professor.getDepartement() != null) {
-            editProfessorRequest.setDepartement(professor.getDepartement().getName());
+            editProfessorRequest.setDepartement(professor.getDepartement().getId());
         } else {
-            // Handle the case where departement is null, e.g., set a default value or leave it blank
-            editProfessorRequest.setDepartement("No Department");
+            editProfessorRequest.setDepartement(null);
         }
 
-        model.addAttribute("departements", departementService.getAllDertement());
+        model.addAttribute("departments", departementService.getAllDertement());
         model.addAttribute("editProfessorRequest", editProfessorRequest);
         return "professors/edit";
     }
@@ -133,9 +132,11 @@ public class ProfessorController {
         professor.setAddress(editProfessorRequest.getAddress());
         professor.setActive(editProfessorRequest.isActive());
         professor.setBirthDate(editProfessorRequest.getBirthDate());
-        professor.setDepartement(professorService.getDertement(editProfessorRequest.getDepartement()));
         professor.setHiringDate(editProfessorRequest.getHiringDate());
-
+        if (editProfessorRequest.getDepartement() != null ) {
+            Departement departement = departementService.getDepartementById(editProfessorRequest.getDepartement());
+            professor.setDepartement(departement);
+        }
         professorService.updateProfessor(professor);
         return "redirect:/professors";
     }

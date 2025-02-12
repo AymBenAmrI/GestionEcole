@@ -42,7 +42,8 @@
             font-size: 1.1rem;
         }
         .btn-custom:hover {
-            background-color: #000000;
+            background-color: #343a40;
+            color: white;
         }
         .header-title {
             color: #1a1a1a;
@@ -83,9 +84,9 @@
             <!-- Department -->
             <div class="mb-3">
                 <label for="departement" class="form-label">Department</label>
-                <select class="form-select" id="departement" th:field="*{departement}" required>
+                <select class="form-control" id="departement" th:field="*{departement}" required>
                     <option value="">-- Select Department --</option>
-                    <option th:each="dept : ${departements}" th:value="${dept.getName()}" th:text="${dept.getName()}"></option>
+                    <option th:each="dept : ${departments}" th:value="${dept.getName()}" th:text="${dept.getName()}"></option>
                 </select>
             </div>
 

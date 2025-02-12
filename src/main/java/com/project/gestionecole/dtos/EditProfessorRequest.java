@@ -1,5 +1,7 @@
 package com.project.gestionecole.dtos;
 
+import com.project.gestionecole.models.Departement;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -14,7 +16,7 @@ public class EditProfessorRequest {
     private String address;
     private boolean active;
     private LocalDate birthDate;
-    private String departement;
+    private Long departement;
     private LocalDate hiringDate;
 
     public String getMatricule() {
@@ -89,11 +91,11 @@ public class EditProfessorRequest {
         this.birthDate = birthDate;
     }
 
-    public String getDepartement() {
+    public Long getDepartement() {
         return departement;
     }
 
-    public void setDepartement(String departement) {
+    public void setDepartement(Long departement) {
         this.departement = departement;
     }
 
